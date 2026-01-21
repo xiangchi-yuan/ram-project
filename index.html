@@ -186,7 +186,7 @@
         <div class="content has-text-justified">
           <h3 class="title is-4">1. Heterogeneity in Reinforced Task Vectors</h3>
           <p>
-            Existing model merging methods typically assume that task vectors are dense and globally comparable (similar to SFT updates). However, our analysis reveals a critical <b>mismatch</b> between these assumptions and the nature of Reinforcement Learning (RL).
+            Existing model merging methods typically assume that task vectors (parameter updates during post-training) are dense and globally comparable (similar to SFT updates). However, our analysis reveals a critical <b>mismatch</b> between these assumptions and the nature of Reinforcement Learning (RL).
             As shown in <b>Figure 2</b>, RL-induced task vectors exhibit extreme <b>sparsity</b> and <b>heterogeneity</b>. For instance, the coding agent modifies only 3.2% of parameters, whereas memory agents update over 54%. More importantly, these updates are distributed across disparate regions of the parameter space, creating unique, non-overlapping patterns for different capabilities.
           </p>
         </div>
@@ -279,15 +279,7 @@
 </section>
 
 
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title">Poster</h2>
-      <iframe src="./static/pdfs/sample.pdf" width="100%" height="550">
-      </iframe>
-    </div>
-  </div>
-</section>
+
 
 
 <section class="section" id="BibTeX">
@@ -296,7 +288,7 @@
     <pre><code>@article{yuan2026ram,
   title={Behavior Knowledge Merge in Reinforced Agentic Models},
   author={Yuan, Xiangchi and Shi, Dachuan and Zhang, Chunhui and Liu, Zheyuan and Yao, Shenglong and Vosoughi, Soroush and Lee, Wenke},
-  journal={arXiv preprint arXiv:26XX.XXXXX},
+  journal={arXiv preprint arXiv:2601.13572},
   year={2026}
 }</code></pre>
   </div>
