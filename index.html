@@ -184,32 +184,45 @@
         <h2 class="title is-3">Motivations</h2>
         
         <div class="content has-text-justified">
+          <h3 class="title is-4">1. Heterogeneity in Reinforced Task Vectors</h3>
           <p>
-            We evaluated RAM across multiple environments including Meta-World and Minecraft.
+            Existing model merging methods typically assume that task vectors are dense and globally comparable (similar to SFT updates). However, our analysis reveals a critical <b>mismatch</b> between these assumptions and the nature of Reinforcement Learning (RL).
+          </p>
+          <p>
+            As shown in <b>Figure 2</b>, RL-induced task vectors exhibit extreme <b>sparsity</b> and <b>heterogeneity</b>. For instance, the coding agent modifies only 3.2% of parameters, whereas memory agents update over 54%. More importantly, these updates are distributed across disparate regions of the parameter space, creating unique, non-overlapping patterns for different capabilities.
           </p>
         </div>
 
         <div class="content">
-          <img src="./static/images/main_results.png" alt="Quantitative Results" style="width: 100%; margin-bottom: 20px;"/>
+          <img src="./static/images/motivation1.png" alt="Heterogeneity in Sparsity and Distribution" style="width: 100%; margin-bottom: 10px;"/>
           <p class="subtitle is-6">
-            <b>Table 1:</b> Comparison of RAM against standard merging baselines (Task Arithmetic, TIES, DARE) on the Meta-World benchmark.
+            <b>Figure 2:</b> <b>Left:</b> Reinforced task vectors exhibit varying degrees of sparsity across different agents (Code, Tool, Memory). <b>Right:</b> The non-zero elements of these vectors are distributed heterogeneously, with significant portions being "unique" to specific tasks rather than shared.
           </p>
         </div>
-      </div>
-    </div>
 
-    <div class="columns is-centered has-text-centered" style="margin-top: 3rem;">
-      <div class="column is-four-fifths">
-        <h3 class="title is-4">Impact of Sparsity</h3>
+        <br>
+
         <div class="content has-text-justified">
+          <h3 class="title is-4">2. The "Signal Dilution" Problem</h3>
           <p>
-            We analyze how the sparsity of the task vectors affects the merging performance. As shown below, RL agents exhibit significantly higher sparsity compared to SFT models.
+            Why do standard merging methods fail in this regime? The culprit is a phenomenon we term <b>Signal Dilution</b>. 
           </p>
-          <img src="./static/images/sparsity_analysis.png" alt="Sparsity Analysis" style="width: 80%;"/>
+          <p>
+            Standard methods rely on global averaging (e.g., <code>1/N</code>). When an agent has a "unique" update for a specific parameter (while others do not), averaging divides this critical signal by the number of models, effectively treating the zero-updates from other agents as valid data. 
+            <br><br>
+            <b>Figure 3</b> demonstrates the impact of this dilution. Unique regions drive significant performance gains (orange bars). However, when we simulate standard averaging by diluting these unique vectors (teal bars), the performance drops sharply. This necessitates a method like RAM, which can disentangle and preserve these unique signals.
+          </p>
         </div>
+
+        <div class="content">
+          <img src="./static/images/motivation2.png" alt="Signal Dilution Analysis" style="width: 80%; margin-bottom: 10px;"/>
+          <p class="subtitle is-6">
+            <b>Figure 3:</b> Analysis of <b>Signal Dilution</b>. The "unique" regions of task vectors (orange) are critical for domain-specific performance (e.g., Coding). Applying standard averaging dilutes these signals (teal), causing significant performance regression across all domains.
+          </p>
+        </div>
+
       </div>
     </div>
-
   </div>
 </section>
 
